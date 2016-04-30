@@ -23,6 +23,7 @@ import cn.xjtu.locus.Service.DataItemService;
 import cn.xjtu.locus.common.Result;
 
 @Service
+@Transactional
 public class DataItemServiceImpl extends BaseServiceImpl<Long, DataItem>implements DataItemService {
 
 	

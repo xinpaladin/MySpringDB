@@ -2,12 +2,14 @@ package cn.xjtu.locus.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.xjtu.locus.Dao.DataDetailDao;
 import cn.xjtu.locus.Entity.DataDetail;
 import cn.xjtu.locus.Service.DataDetailService;
 
 @Service
+@Transactional
 public class DataDetailServiceImpl extends BaseServiceImpl<Long, DataDetail> implements DataDetailService {
 
 	@Autowired

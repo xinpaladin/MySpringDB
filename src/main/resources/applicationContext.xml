@@ -59,7 +59,7 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceXmlLocation" value="classpath:/persistence.xml" />
+		<property name="persistenceXmlLocation" value="classpath*:/persistence.xml" />
 		<property name="persistenceProvider" ref="persistenceProvider" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -69,7 +69,7 @@
 		</property>
 		<property name="jpaDialect" ref="jpaDialect" />
 
-		<property name="packagesToScan" value="entity" />
+		<property name="packagesToScan" value="cn.xjtu.locus.Entity" />
 
 		<property name="jpaProperties">
 			<props>

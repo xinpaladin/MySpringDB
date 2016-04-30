@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.xjtu.locus.Dao.BaseDao;
 import cn.xjtu.locus.Service.BaseService;
 
+@Transactional
 public class BaseServiceImpl<ID extends Serializable , T> implements BaseService<ID, T>{
 
 	/** baseDao */
