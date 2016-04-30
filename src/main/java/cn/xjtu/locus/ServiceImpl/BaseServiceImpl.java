@@ -18,21 +18,17 @@ public class BaseServiceImpl<ID extends Serializable , T> implements BaseService
 	}
 
 	@Transactional
-	@Override
 	public void add(T entity) {
-		
 		baseDao.add(entity);
 	}
 
 	@Transactional
-	@Override
 	public void delete(T entity) {
 		baseDao.delete(entity);
 		
 	}
 
 	@Transactional
-	@Override
 	public void delete(List<T> entities) {
 		for(T entity:entities){
 			delete(entity);
@@ -41,29 +37,24 @@ public class BaseServiceImpl<ID extends Serializable , T> implements BaseService
 	}
 
 	@Transactional
-	@Override
 	public void delete(ID id) {
 		baseDao.delete(id);
 		
 	}
 
 	@Transactional
-	@Override
 	public void update(T entity) {
 		baseDao.update(entity);
 		
 	}
 
 	@Transactional(readOnly=true)
-	@Override
 	public T find(ID id) {
-		
 		return baseDao.find(id);
 	}
 
 
 	@Transactional(readOnly=true)
-	@Override
 	public List<T> findAll() {
 		// TODO Auto-generated method stub
 		return baseDao.findAll();

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.xjtu.locus.Dao.DataDetailDao;
 import cn.xjtu.locus.Dao.DataItemDao;
@@ -41,7 +42,7 @@ public class DataItemServiceImpl extends BaseServiceImpl<Long, DataItem>implemen
 	}
 	
 	
-	
+	@Transactional
 	public Result insertData(String path){
 
 		File file = new File(path);
