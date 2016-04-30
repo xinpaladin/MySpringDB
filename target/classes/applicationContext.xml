@@ -18,6 +18,9 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
+	<!-- 该bean后处理器会告诉spring处理dao组件中的@PersistenceContext -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/> 
+	
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<!-- 属性文件位置 -->
@@ -96,8 +99,7 @@
 	<!-- 注解式事务 -->
 	<tx:annotation-driven transaction-manager="txManager" />
 
-	<!-- 该bean后处理器会告诉spring处理dao组件中的@PersistenceContext -->
-	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/> 
+	
 
 	<!-- 启用缓存注解功能 -->
 	<!-- <ehcache:annotation-driven cache-manager="ehCacheManager" /> -->

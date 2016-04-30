@@ -24,7 +24,7 @@ public class BaseDaoImpl<ID extends Serializable, T> implements BaseDao<ID, T> {
 		Type type = getClass().getGenericSuperclass();
 		Type[] parameterizedType = ((ParameterizedType) type)
 				.getActualTypeArguments();
-		entityClass = (Class<T>) parameterizedType[0];
+		entityClass = (Class<T>) parameterizedType[1];
 	}
 
 	public void add(T entity) {
