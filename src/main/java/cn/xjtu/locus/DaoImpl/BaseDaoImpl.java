@@ -11,10 +11,10 @@ import javax.persistence.Query;
 
 import cn.xjtu.locus.Dao.BaseDao;
 
-public class BaseDaoImpl<K extends Serializable, V> implements BaseDao<K, V> {
+public class BaseDaoImpl<ID extends Serializable, T> implements BaseDao<ID, T> {
 
 	/** 实体类类型 */
-	private Class<V> entityClass;
+	private Class<T> entityClass;
 
 	@PersistenceContext
 	protected EntityManager manager;
@@ -24,52 +24,54 @@ public class BaseDaoImpl<K extends Serializable, V> implements BaseDao<K, V> {
 		Type type = getClass().getGenericSuperclass();
 		Type[] parameterizedType = ((ParameterizedType) type)
 				.getActualTypeArguments();
-		entityClass = (Class<V>) parameterizedType[0];
+		entityClass = (Class<T>) parameterizedType[0];
 	}
 
-	public void add(V entity) {
+	public void add(T entity) {
 		manager.persist(entity);
 	}
 
-	public void delete(V entity) {
+	public void delete(T entity) {
 		manager.remove(entity);
 	}
 
-	public void delete(List<V> entities) {
-		for (V entity : entities) {
-			delete(entity);
-		}
+	public void delete(ID id) {
+		manager.createQuery("delete" + entityClass.getSimpleName() +"en where en.id = ?0").setParameter(0, id).executeUpdate();
 	}
 
-	public void delete(K id) {
-		manager.remove(find(id));
-	}
-
-	public void update(V entity) {
+	public void update(T entity) {
 		manager.merge(entity);
 	}
 
-	public V find(K id) {
+	public T find(ID id) {
 		return manager.find(entityClass, id);
 	}
 
-	public V findSingle(String hql, Object... params) {
-		return null;
+	@SuppressWarnings("unchecked")
+	public T findSingle(String hql, Object... params) {
+		Query query = manager.createQuery(hql);
+		for(int i=0;i<params.length;i++){
+			query.setParameter(i, params[i]);
+		}
+		return (T) query.getSingleResult();
 	}
 
 	/** 根据带占位符参数的JPQL语句查询实体*/
 	@SuppressWarnings("unchecked")
-	public List<V> find(String jql, Object... params) {
+	public List<T> find(String jql, Object... params) {
 		Query query = manager.createNamedQuery(jql);
 		for(int i =0;i<params.length;i++){
 			query.setParameter(i, params[i]);
 		}
-		return (List<V>)query.getResultList();
+		return (List<T>)query.getResultList();
 	}
 
-	public List<V> findAll() {
-
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<T> findAll() {
+		
+		return manager.createQuery("selecr en from" + entityClass.getSimpleName()+" en").getResultList();
 	}
 
 }
+
+

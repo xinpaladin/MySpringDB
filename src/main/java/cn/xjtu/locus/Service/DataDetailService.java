@@ -1,5 +1,9 @@
 package cn.xjtu.locus.Service;
 
-public interface DataDetailService {
+import cn.xjtu.locus.Entity.DataDetail;
+
+public interface DataDetailService extends BaseService<Long, DataDetail>{
+
+	public DataDetail initDataDetail(String data);
 
 }

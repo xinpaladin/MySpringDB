@@ -28,7 +28,10 @@ public class DataItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
+	
+
+	private String fileName;//文件名称
 	private String driverName;// 驾驶员名称
 	private boolean isAvailable;// 是否可用
 	private String speed;// 速度性
@@ -64,11 +67,11 @@ public class DataItem {
 		this.comfortable = comfortable;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -108,6 +111,13 @@ public class DataItem {
 		this.type = type;
 	}
 
-	
+	@Column(length=50)
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 }

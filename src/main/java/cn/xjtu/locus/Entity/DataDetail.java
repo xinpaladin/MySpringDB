@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class DataDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	// private int SynWord1;// 同步字1
 	// private int SynWord2;// 同步字2
@@ -48,14 +48,14 @@ public class DataDetail {
 	// private double MagVir;// 磁差
 	// private int Check;// 校验和
 
-	private int dataItemId;
+	private Long dataItemId;
 
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	@Column(length=20)
@@ -220,11 +220,11 @@ public class DataDetail {
 		TimeSecond = timeSecond;
 	}
 
-	public int getDataItemId() {
+	public Long getDataItemId() {
 		return dataItemId;
 	}
 
-	public void setDataItemId(int dataItemId) {
+	public void setDataItemId(Long dataItemId) {
 		this.dataItemId = dataItemId;
 	}
 

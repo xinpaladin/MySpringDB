@@ -19,8 +19,12 @@
 					path : path
 				},
 				url : "insertData.html",
-				success : function(message) {
-					alert(message);
+				success : function(result) {
+					if(result.succes){
+						alert("success");
+					}else{
+						alert(result.message);
+					}
 				}
 			});
 		});
