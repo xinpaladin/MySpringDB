@@ -38,8 +38,8 @@ public class DataItemServiceImpl extends BaseServiceImpl<Long, DataItem>implemen
 	private DataItemDao itemDao;
 	
 	@Autowired
-	public void setBaseDao(DataItemDao dataItemDao){
-		super.setBaseDao(dataItemDao);
+	public void setBaseDao(DataItemDao itemDao){
+		super.setBaseDao(itemDao);
 	}
 	
 	

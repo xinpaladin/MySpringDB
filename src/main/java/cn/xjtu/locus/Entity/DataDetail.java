@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "data_detail")
 public class DataDetail {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	// private int SynWord1;// 同步字1

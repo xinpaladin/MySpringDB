@@ -17,10 +17,11 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-	
+
 	<!-- 该bean后处理器会告诉spring处理dao组件中的@PersistenceContext -->
-	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/> 
-	
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<!-- 属性文件位置 -->
@@ -55,11 +56,18 @@
 		<property name="releaseHelperThreads" value="${BoneCP.releaseHelperThreads}" />
 	</bean>
 
+	<!-- 用于指定持久化实现厂商类 -->
+	<bean id="persistenceProvider" class="org.hibernate.jpa.HibernatePersistenceProvider" />
+
+	<!-- 用于指定一些高级特性 -->
+	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+
 	<!-- JPA实体管理器工厂 -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceXmlLocation" value="classpath*:/persistence.xml" />
+		<property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml" />
+		<property name="persistenceUnitName" value="persistenceUnit" />
 		<property name="persistenceProvider" ref="persistenceProvider" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -69,7 +77,7 @@
 		</property>
 		<property name="jpaDialect" ref="jpaDialect" />
 
-		<property name="packagesToScan" value="cn.xjtu.locus.Entity" />
+		<property name="packagesToScan" value="cn.xjtu.locus" />
 
 		<property name="jpaProperties">
 			<props>
@@ -85,23 +93,14 @@
 			</props>
 		</property>
 	</bean>
-	<!-- 用于指定持久化实现厂商类 -->
-	<bean id="persistenceProvider" class="org.hibernate.ejb.HibernatePersistence" />
-	
-	<!-- 用于指定一些高级特性 -->
-	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+
 
 	<!-- 事务管理器 -->
-	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
 	<!-- 注解式事务 -->
-	<tx:annotation-driven transaction-manager="txManager" />
-
-	
-
-	<!-- 启用缓存注解功能 -->
-	<!-- <ehcache:annotation-driven cache-manager="ehCacheManager" /> -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
